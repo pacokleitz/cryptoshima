@@ -1,0 +1,31 @@
+version: "3"
+
+tasks:
+  fmt:
+    desc: Format the go source files.
+    cmds:
+      - go fmt ./...
+
+  lint:
+    desc: Run .golangci.yaml linting rules.
+    cmds:
+      - golangci-lint run
+
+  test:
+    desc: Run all the go tests.
+    cmds:
+      - go test -race ./...
+
+  check:
+    desc: Run fmt+lint+test tasks in parallel.
+    deps: [fmt, lint, test]
+
+  build:
+    desc: Build the go binary.
+    cmds:
+      - go build -o ./cryptoshima
+
+  run:
+    desc: Run the go program.
+    cmds:
+      - go run .
